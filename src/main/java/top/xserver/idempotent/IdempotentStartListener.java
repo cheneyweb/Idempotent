@@ -19,11 +19,7 @@ public class IdempotentStartListener implements ApplicationListener<ApplicationE
     @Override
     public void onApplicationEvent(ApplicationEvent applicationEvent) {
         if (applicationEvent instanceof ApplicationStartedEvent) {
-            System.out.println("幂等组件已启动");
-//            Idempotent idempotent = applicationContext.getBean(Idempotent.class);
-//            if (idempotent != null) {
-//                Banner.print();
-//            }
+            System.out.println("========== 幂等防重组件已加载 ==========");
         }
     }
 }

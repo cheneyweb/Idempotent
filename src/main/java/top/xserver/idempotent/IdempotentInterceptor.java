@@ -22,7 +22,7 @@ public class IdempotentInterceptor {
         this.protector = protector;
     }
 
-    @Before("@annotation(com.dingstock.lib.idempotent.annotation.Idempotent)")
+    @Before("@annotation(top.xserver.idempotent.annotation.Idempotent)")
     public void doBefore(JoinPoint joinPoint) throws Exception {
         // 获取方法切面信息，注解信息
         MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
@@ -34,8 +34,8 @@ public class IdempotentInterceptor {
         for (int i = 0; i < paramNames.length; i++) {
             ctx.setVariable(paramNames[i], paramValues[i]);
         }
-        String key = new SpelExpressionParser().parseExpression(idempotent.key()).getValue(ctx).toString();
-        if (key == null || !isIdempotent(key, idempotent)) {
+        Object keyObj = new SpelExpressionParser().parseExpression(idempotent.key()).getValue(ctx);
+        if (keyObj == null || !isIdempotent(keyObj.toString(), idempotent)) {
             Class<? extends Exception> exception = idempotent.exception();
             Constructor<? extends Exception> declaredConstructor = exception.getDeclaredConstructor(String.class);
             throw declaredConstructor.newInstance(idempotent.msg());

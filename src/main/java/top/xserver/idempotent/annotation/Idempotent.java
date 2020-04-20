@@ -6,11 +6,6 @@ import top.xserver.idempotent.exception.IdempotentException;
 
 import java.lang.annotation.*;
 
-/**
- * 幂等注解
- *
- * @author cheney
- */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.METHOD})
 @Documented

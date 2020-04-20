@@ -6,7 +6,7 @@
 
     <groupId>top.xserver</groupId>
     <artifactId>idempotent-spring-boot-starter</artifactId>
-    <version>0.0.2.RELEASE</version>
+    <version>0.0.3.RELEASE</version>
     <packaging>jar</packaging>
 
     <parent>
