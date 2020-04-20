@@ -9,12 +9,6 @@ import java.lang.annotation.*;
 /**
  * 幂等注解
  *
- * @param key       重复ID，SPEL表达式
- * @param prefix    前缀
- * @param type      拦截策略
- * @param duration  时间单位ms
- * @param msg       错误消息
- * @param exception 重复异常
  * @author cheney
  */
 @Retention(RetentionPolicy.RUNTIME)
