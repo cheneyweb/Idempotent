@@ -2,7 +2,7 @@
 SpringBoot幂等防重组件，基于Redis滤重，一行注解开箱即用
 
 ## 配置说明
->SpringBoot项目中需已提前接入redis服务，本组件已启用自动配置，应用启动后，会默认依赖使用StringRedisTemplate来执行redis操作
+>SpringBoot项目中需已提前接入redis服务，本组件已启用自动配置，默认依赖使用StringRedisTemplate来执行redis操作
 
 ## 快速上手
 >
