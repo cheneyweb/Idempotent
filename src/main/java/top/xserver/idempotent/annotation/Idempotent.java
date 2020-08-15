@@ -44,6 +44,13 @@ public @interface Idempotent {
     long duration() default 300;
 
     /**
+     * 容忍次数
+     *
+     * @return
+     */
+    long times() default 1;
+
+    /**
      * 错误提示
      *
      * @return String

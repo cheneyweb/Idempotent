@@ -35,6 +35,7 @@ public class IdempotentInterceptor {
             ctx.setVariable(paramNames[i], paramValues[i]);
         }
         Object keyObj = new SpelExpressionParser().parseExpression(idempotent.key()).getValue(ctx);
+        // 未通过幂等防护则抛出异常
         if (keyObj == null || !isIdempotent(keyObj.toString(), idempotent)) {
             Class<? extends Exception> exception = idempotent.exception();
             Constructor<? extends Exception> declaredConstructor = exception.getDeclaredConstructor(String.class);
@@ -42,13 +43,14 @@ public class IdempotentInterceptor {
         }
     }
 
+    // 判断是否通过幂等防护
     private boolean isIdempotent(String key, Idempotent idempotent) {
         key = idempotent.prefix() + key.hashCode();
         if (IdempotentTypeEnum.FIXED_WINDOW == idempotent.type()) {
-            return protector.fixed(key, idempotent.duration());
+            return protector.fixed(key, idempotent);
         } else if (IdempotentTypeEnum.SLIDING_WINDOW == idempotent.type()) {
-            return protector.sliding(key, idempotent.duration());
+            return protector.sliding(key, idempotent);
         }
-        return protector.sliding(key, idempotent.duration());
+        return protector.sliding(key, idempotent);
     }
 }
