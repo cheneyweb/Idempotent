@@ -22,6 +22,12 @@ public class RedisProtector implements Protector {
      */
     @Override
     public Boolean fixed(String key, Idempotent idempotent) {
+        // 单次幂等控制
+        if (idempotent.times() == 1) {
+            return stringRedisTemplate.opsForValue().setIfAbsent(key, "1", Duration.ofMillis(idempotent.duration()));
+        }
+
+        // 多次幂等控制
         Boolean isSet = stringRedisTemplate.opsForValue().setIfAbsent(key, "1", Duration.ofMillis(idempotent.duration()));
         // 首次设置直接通过
         if (isSet) {
@@ -43,6 +49,12 @@ public class RedisProtector implements Protector {
      */
     @Override
     public Boolean sliding(String key, Idempotent idempotent) {
+        // 单次幂等控制
+        if (idempotent.times() == 1) {
+            return stringRedisTemplate.opsForValue().setIfAbsent(key, "1", Duration.ofMillis(idempotent.duration()));
+        }
+
+        // 多次幂等控制
         Boolean isSet = stringRedisTemplate.opsForValue().setIfAbsent(key, "1", Duration.ofMillis(idempotent.duration()));
         // 首次设置直接通过
         if (isSet) {
