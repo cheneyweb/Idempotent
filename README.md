@@ -11,7 +11,7 @@ SpringBoot幂等防重组件，基于Redis滤重，一行注解开箱即用
 <dependency>
     <groupId>top.xserver</groupId>
     <artifactId>idempotent-spring-boot-starter</artifactId>
-    <version>0.0.3.RELEASE</version>
+    <version>0.1.0.RELEASE</version>
 </dependency>
 ```
 2、在控制器方法上加入幂等注解
@@ -30,6 +30,7 @@ key | value    幂等唯一键   （必须，SPEL表达式）
 type           策略类型     （默认固定窗口）
 prefix         前缀        （默认IDEMPOTENT）
 duration       持续时间     （默认300ms）
+times          防重次数     （默认1次）
 msg            防重消息     （默认repeat）
 exception      重复异常     （默认IdempotentException）
 ```
